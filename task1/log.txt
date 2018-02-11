@@ -1,0 +1,11 @@
+commit d55078beb68292cf69653fad24ede82607701c62 (HEAD -> master)
+Author: Gavrilenko Egor <gavrilenkoegor18@gmail.com>
+Date:   Sun Feb 11 14:36:43 2018 +0300
+
+    add task1
+
+commit 3a5c746ce7cdf3d84f4e6fe8c9f79024bcea8753
+Author: Gavrilenko Egor <gavrilenkoegor18@gmail.com>
+Date:   Sun Feb 11 14:27:59 2018 +0300
+
+    add .gitignore
