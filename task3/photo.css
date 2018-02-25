@@ -1,0 +1,135 @@
+.pictures{
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 30px;
+  margin-left: 35%;
+  margin-right: 35%;
+  width: 30%;
+  position: static;
+  color: BLACK;
+}
+.post{
+  width: 100%;
+  margin-top: 30px;
+}
+.user{
+  border: 0;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+
+  background: url(photo/dog-and-cat-1024x768.jpg) no-repeat;
+  float: left;
+}
+.photo{
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  padding-top: 100%;
+  margin-right: 10px;
+  margin-top: 5px;
+  background: url(photo/1493458336187917536.jpg);
+}
+.photo1{
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  padding-top: 100%;
+  margin-right: 10px;
+  margin-top: 5px;
+  background: url(photo/dog-and-cat-1024x768.jpg);
+}
+.photo2{
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  padding-top: 100%;
+  margin-right: 10px;
+  margin-top: 5px;
+  background: url(photo/i.jpg);
+}
+.photo3{
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  padding-top: 100%;
+  margin-right: 10px;
+  margin-top: 5px;
+  background: url(photo/images2.jpg);
+}
+.photo4{
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  padding-top: 100%;
+  margin-right: 10px;
+  margin-top: 5px;
+  background: url(photo/images.jpg);
+}
+.photo5{
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  padding-top: 100%;
+  margin-right: 10px;
+  margin-top: 5px;
+  background: url(photo/1487198370150461553.jpg);
+}
+.description{
+  padding: 10px;
+}
+.tegs{
+  padding: 10px;
+  color: #191694
+}
+.post_1{
+  border-radius: 10px;
+  background-color: #C4C4C4;
+}
+.like_no{
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  border: 1px solid #000;
+  border-radius: 20px;
+}
+.like_yes{
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  border: 0;
+  background-color: #FF5C5C;
+  border-radius: 20px;
+}
+.upload_date{
+  text-align: center;
+  float: right;
+  margin: 20px;
+}
+.more_photo{
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+  background-color: #00D459;
+}
+.delete_photo{
+    background: url(delete.png);
+    float: right;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+}
+.processing{
+  float: right;
+  background: url(processing.png);
+  float: right;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
