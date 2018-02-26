@@ -1,6 +1,7 @@
 body{
   background-color: #DBD9D9;
   font-family: Comic Sans MS,cursive;
+  min-width: 450px;
 }
 
 .foter{
@@ -14,6 +15,7 @@ body{
   position:fixed;
   margin:0 10% 0 10%;
   border-radius: 20px 20px 0 0;
+  min-width: 400px;
 }
 /*header*/
 .header{
@@ -27,6 +29,7 @@ body{
   top:0;
   position: fixed;
   border-radius: 0 0 20px 20px;
+  min-width: 450px;
 }
 .account{
   margin-left: 5px;
@@ -90,7 +93,7 @@ body{
 .filter{
   background-color: #CD79ED;
   border-radius: 20px 20px 20px 20px;
-  width: 210px;
+  width: 150px;
   position: fixed;
   height: 50px;
   z-index:1;
@@ -107,7 +110,7 @@ body{
 	list-style-type: none;
 	font-size: 17px;
 	position: relative;
-	width: 150px;
+	width: 145px;
 }
 .dropdown {
 	display: none;
