@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="checkbox.css">
     <link rel="stylesheet" href="photo.css">
+
+    <!-- JavaScriptModule -->
+    <script type="text/javascript" src="photo_post_arrays.js"></script>
+    <script type="text/javascript" src="function.js"></script>
+
+    <!-- the main script -->
+    <script type="text/javascript" src="CamRoll.js"></script>
+
 </head>
 <body>
 <div class="header">
@@ -26,13 +34,12 @@
                 <li>
                     <input type="checkbox" class="checkbox" id="checkbox_name"/>
                     <label for="checkbox_name">Name</label>
-                    <input type="text" size="15" class="input_text">
+                    <input type="text" size="15" class="input_text" id="input_name">
                 </li>
                 <li>
                     <input type="checkbox" class="checkbox" id="checkbox_date"/>
                     <label for="checkbox_date">Date</label>
-                    <select class="input_date">
-                        <option>any time</option>
+                    <select class="input_date" id="select_date">
                         <option>last 24 hour</option>
                         <option>last week</option>
                         <option>last month</option>
@@ -42,11 +49,13 @@
                 <li>
                     <input type="checkbox" class="checkbox" id="checkbox_tag"/>
                     <label for="checkbox_tag">Tag</label>
-                    <input type="text" size="15" class="input_text">
+                    <input type="text" size="15" class="input_text" id="input_tag">
                 </li>
             </ul>
     </ul>
 </div>
+
+
 
 
 <div class="pictures">
