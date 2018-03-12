@@ -1,0 +1,154 @@
+.pictures{
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 30px;
+  margin-left: 35%;
+  margin-right: 35%;
+  width: 30%;
+  position: static;
+  color: BLACK;
+  min-width: 200px;
+}
+.post{
+  width: 100%;
+  margin-top: 30px;
+}
+.user{
+  border: 0;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+
+  background: url(photo/dog-and-cat-1024x768.jpg) no-repeat;
+  float: left;
+}
+.photo{
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  padding-top: 100%;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.description{
+  padding: 10px;
+}
+.tegs{
+  padding: 10px;
+  color: #191694
+}
+.post_1{
+  border-radius: 10px;
+  background-color: #C4C4C4;
+}
+.like_no{
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  border: 1px solid #000;
+  border-radius: 20px;
+}
+.like_yes{
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  border: 0;
+  background-color: #FF5C5C;
+  border-radius: 20px;
+}
+.upload_date{
+  text-align: center;
+  float: right;
+  margin: 20px;
+}
+.more_photo{
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+  background-color: #00D459;
+}
+.more_photo a{
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+.delete_photo{
+    background: url(delete.png);
+    float: right;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+}
+.processing{
+  float: right;
+  background: url(processing.png);
+  float: right;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.delete_message{
+  width: 200px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #000;
+    border-radius: 20px;
+    background-color: azure;
+    text-align: center;
+    margin: -125px 0 0 -125px;
+}
+.button_yes{
+  margin-top: 50px;
+  margin-left: 10px;
+  border-radius: 10px;
+  float: left;
+}
+.button_no{
+  margin-top: 50px;
+  margin-right: 10px;
+  border-radius: 10px;
+  float: right;
+}
+.button_ok{
+  background-color: #00D459;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-left: 10px;
+  border-radius: 20px;
+  float: left;
+  margin-bottom: 100px;
+}
+.button_cancel{
+  background-color: #FF5C5C;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-right: 10px;
+  border-radius: 20px;
+  float: right;
+  margin-bottom: 100px;
+}
+.addphoto{
+  background: url(add.png);
+  width: 200px;
+  height: 200px;
+  margin: 0 20% 0 20%;
+}
+.input_for_edit{
+  width: 50%;
+  border: #000;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  margin-right: 100%;
+  margin-bottom: 10px;
+}

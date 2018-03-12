@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CamRoll</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="checkbox.css">
+    <link rel="stylesheet" href="photo.css">
+
+    <!-- JavaScriptModule -->
+    <script type="text/javascript" src="photo_post_arrays.js"></script>
+
+    <!-- the main script -->
+    <script type="text/javascript" src="CamRoll.js"></script>
+
+    
+    <script type="text/javascript" src="construction_of_DOM.js"></script>
+</head>
+<body onload='workWithDOM.start();'>
+<div class="header">
+    <div class="account">
+        <div class="account_photo"></div>
+        Гавриленко Егор
+    </div>
+    <div class="add_photo" onclick="workWithDOM.addPhotoPost()">Add Photo</div>
+    <div class="sign_in">Exit</div>
+</div>
+
+
+<div class="filter">
+    <ul>
+        <li class="nav">--filter--
+            <ul class="dropdown">
+                <li>
+                    <input type="checkbox" class="checkbox" id="checkbox_name" onchange="workWithDOM.filterSelected()"/>
+                    <label for="checkbox_name">Name</label>
+                    <input type="text" size="15" class="input_text" id="input_name">
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox" id="checkbox_date" onchange="workWithDOM.filterSelected()"/>
+                    <label for="checkbox_date">Date</label>
+                    <select class="input_date" id="select_date">
+                        <option>last 24 hour</option>
+                        <option>last week</option>
+                        <option>last month</option>
+                        <option>last year</option>
+                    </select>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox" id="checkbox_tag" onchange="workWithDOM.filterSelected()"/>
+                    <label for="checkbox_tag">Tag</label>
+                    <input type="text" size="15" class="input_text" id="input_tag">
+                </li>
+            </ul>
+    </ul>
+</div>
+
+
+
+
+<div class="pictures" id="perentid">
+    
+        
+
+
+</div>
+
+
+<div class="foter">
+    CamRoll | Гавриленко Егор | 2 курс 2 группа | gavrilenkoegor18@gmail.com | 16.02.2018
+</div>
+
+
+</body>
+</html>
