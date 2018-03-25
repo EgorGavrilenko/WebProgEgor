@@ -2,6 +2,7 @@ body{
   background-color: #DBD9D9;
   font-family: Comic Sans MS,cursive;
   min-width: 450px;
+    height: 100%;
 }
 
 .foter{
@@ -37,15 +38,7 @@ body{
   border-radius: 0 0 40px 40px;
   background-color: #C4C4C4;
   float: left;
-  padding-right: 5px;
-
-}
-.account_photo{
-  border-radius: 0 0 10px 10px;
-  height: 30px;
-  width: 30px;
-  background-image: url(photo/dog-and-cat-1024x768.jpg);
-  float: left;
+  padding: 10px;
 }
 .add_photo{
   border: 0;
@@ -67,8 +60,7 @@ body{
   height: 100%;
   text-decoration: none;
 }
-.sign_in
-{
+.sign_in{
   border: 0;
   background-color: #C4C4C4;
   margin-right: 10px;
@@ -96,7 +88,6 @@ body{
   width: 150px;
   position: fixed;
   height: 50px;
-  z-index:1;
   top: 70px;
   left: 5px;
   color: BLACK;

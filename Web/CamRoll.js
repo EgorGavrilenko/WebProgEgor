@@ -73,6 +73,7 @@ var camRollFunction = (function() {
     }
 
     function validatePhotoPost(photoPost) {
+        
         if (!(typeof photoPost === "object"))
             return false;
         if (!('id' in photoPost)) {
@@ -125,6 +126,7 @@ var camRollFunction = (function() {
         p.like = [];
         if (validatePhotoPost(p)) {
             photoPostsModule.photoPosts.push(p);
+            photoPostsModule.updatelocalStorage();
             return true;
         } else
             return false;
@@ -140,6 +142,7 @@ var camRollFunction = (function() {
             return false;
         } else {
             photoPostsModule.photoPosts.splice(photoPostsModule.photoPosts.indexOf(k), 1);
+            photoPostsModule.updatelocalStorage();
             return true;
         }
     }
@@ -179,6 +182,8 @@ var camRollFunction = (function() {
                         photoPostsModule.photoPosts[photoPostsModule.photoPosts.indexOf(k)]['like'] = change['like'];
                 }
             }
+            
+            photoPostsModule.updatelocalStorage();
             return true;
         }
     }
