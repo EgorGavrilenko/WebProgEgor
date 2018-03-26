@@ -25,6 +25,8 @@ var camRollFunction = (function() {
     }
 
     function getPhotoPosts(skip, top, filterConfig) {
+        if(skip>photoPostsModule.photoPosts.length)
+        return null;
         let arr = [],
             array = [];
         arr = photoPostsModule.photoPosts.filter(function(val) {

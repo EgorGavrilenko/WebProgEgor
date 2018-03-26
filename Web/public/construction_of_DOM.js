@@ -9,6 +9,7 @@ var workWithDOM = function() {
         let perent = document.getElementById("perentid");
         let morePhoto = document.getElementById("morePhoto");
         perent.removeChild(morePhoto);
+        console.log(last);
         creatingPost(last, count, filterConfig);
     }
 
@@ -106,13 +107,12 @@ var workWithDOM = function() {
             let div_more_photo = document.createElement('div');
             div_more_photo.innerHTML = "more photo";
             div_more_photo.className = "more_photo";
-            div_more_photo.id="more_photo";
             div_more_photo.onclick = function() {
                 loadMorePhoto()
             };
             div_more_photo.id = "morePhoto";
             perent.appendChild(div_more_photo);
-            setLast( last + arr_photo.length);
+            setLast( skip + arr_photo.length);
         }
     };
 
@@ -238,6 +238,7 @@ var workWithDOM = function() {
         };
         button_cancel.onclick = function() {
             document.body.removeChild(div_sign_in)
+            cleanBlock();
         };
 
         div_sign_in.appendChild(button_signIn);
