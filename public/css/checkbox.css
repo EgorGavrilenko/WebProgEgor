@@ -9,7 +9,7 @@
   padding: 0 0 0 60px;
   cursor: pointer;
 }
-.checkbox + label:before {
+.checkbox +  label:before {
   content: '';
   position: absolute;
   top: -4px;

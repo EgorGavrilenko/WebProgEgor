@@ -1,4 +1,4 @@
-; var password = function() {
+; let password = function() {
    let passwords = [
        {
            login: "Гавриленко Егор",

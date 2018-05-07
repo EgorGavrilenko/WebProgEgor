@@ -1,4 +1,5 @@
-[{
+[
+  {
     "id": "1",
     "descriprion": "бам бам тсс",
     "createdAt": "2018-03-02T21:00:00.000Z",
@@ -6,7 +7,8 @@
     "photoLink": "photo/1493458336187917536.jpg",
     "tag": ["goodtime"],
     "like": ["Гавриленко Егор"]
-}, {
+  },
+  {
     "id": "2",
     "descriprion": "лучший друг",
     "createdAt": "2017-05-02T21:00:00.000Z",
@@ -14,7 +16,8 @@
     "photoLink": "photo/dog-and-cat-1024x768.jpg",
     "tag": ["goodtime", "dog", "good_boy", "gm"],
     "like": []
-}, {
+  },
+  {
     "id": "3",
     "descriprion": "бам бам тсс",
     "createdAt": "2018-02-26T21:00:00.000Z",
@@ -22,7 +25,8 @@
     "photoLink": "photo/i.jpg",
     "tag": ["goodtime", "gm"],
     "like": []
-}, {
+  },
+  {
     "id": "4",
     "descriprion": "красивый замок",
     "createdAt": "2011-02-27T21:00:00.000Z",
@@ -30,7 +34,8 @@
     "photoLink": "photo/images2.jpg",
     "tag": ["goodtime", "gm", "castl"],
     "like": []
-}, {
+  },
+  {
     "id": "5",
     "descriprion": "красивый вид",
     "createdAt": "2018-03-14T21:00:00.000Z",
@@ -38,7 +43,8 @@
     "photoLink": "photo/images.jpg",
     "tag": ["goodtime", "gm"],
     "like": []
-}, {
+  },
+  {
     "id": "6",
     "descriprion": "я сам не знаю что это))",
     "createdAt": "2018-03-14T21:00:00.000Z",
@@ -46,7 +52,8 @@
     "photoLink": "photo/1487198370150461553.jpg",
     "tag": ["goodtime", "gm", "like"],
     "like": []
-}, {
+  },
+  {
     "id": "7",
     "descriprion": "лучший друг",
     "createdAt": "2018-02-02T21:00:00.000Z",
@@ -54,7 +61,8 @@
     "photoLink": "photo/dog-and-cat-1024x768.jpg",
     "tag": ["goodtime", "dog", "good_boy", "gm"],
     "like": []
-}, {
+  },
+  {
     "id": "8",
     "descriprion": "красивый замок",
     "createdAt": "2016-02-10T21:00:00.000Z",
@@ -62,7 +70,8 @@
     "photoLink": "photo/images2.jpg",
     "tag": ["goodtime", "gm", "castl"],
     "like": []
-}, {
+  },
+  {
     "id": "9",
     "descriprion": "я сам не знаю что это))",
     "createdAt": "2018-03-04T21:00:00.000Z",
@@ -70,7 +79,8 @@
     "photoLink": "photo/1487198370150461553.jpg",
     "tag": ["goodtime", "gm", "like"],
     "like": []
-}, {
+  },
+  {
     "id": "10",
     "descriprion": "красивый вид",
     "createdAt": "2018-03-14T21:00:00.000Z",
@@ -78,7 +88,8 @@
     "photoLink": "photo/images.jpg",
     "tag": ["goodtime", "gm"],
     "like": []
-}, {
+  },
+  {
     "id": "11",
     "descriprion": "водопад",
     "createdAt": "2018-03-03T21:00:00.000Z",
@@ -86,7 +97,8 @@
     "photoLink": "photo/Hopetoun_falls.jpg",
     "tag": ["goodtime", "gm", "nature", "waterfall"],
     "like": []
-}, {
+  },
+  {
     "id": "12",
     "descriprion": "вода",
     "createdAt": "2018-02-03T21:00:00.000Z",
@@ -94,7 +106,8 @@
     "photoLink": "photo/images23.jpg",
     "tag": ["goodtime", "gm", "water", "waterfall"],
     "like": []
-}, {
+  },
+  {
     "id": "13",
     "descriprion": "поле",
     "createdAt": "2017-02-03T21:00:00.000Z",
@@ -102,7 +115,8 @@
     "photoLink": "photo/purple-lavender-field-provence-france.jpg",
     "tag": ["goodtime", "gm", "purple", "nature"],
     "like": []
-}, {
+  },
+  {
     "id": "14",
     "descriprion": "яблочки",
     "createdAt": "2017-02-13T21:00:00.000Z",
@@ -110,7 +124,8 @@
     "photoLink": "photo/5359615-15088823151469610021-1508956902-650-48a5593f5d-1509449347.jpg",
     "tag": ["apple", "nature"],
     "like": []
-}, {
+  },
+  {
     "id": "15",
     "descriprion": "щука",
     "createdAt": "2016-02-03T21:00:00.000Z",
@@ -118,7 +133,8 @@
     "photoLink": "photo/shhuka-800x445.jpg",
     "tag": ["nature", "shhuka"],
     "like": []
-}, {
+  },
+  {
     "id": "16",
     "descriprion": ")))",
     "createdAt": "2017-11-23T21:00:00.000Z",
@@ -126,7 +142,8 @@
     "photoLink": "photo/krasivaya-priroda.jpg",
     "tag": ["nature"],
     "like": []
-}, {
+  },
+  {
     "id": "17",
     "descriprion": "человек и природа",
     "createdAt": "2018-01-31T21:00:00.000Z",
@@ -134,7 +151,8 @@
     "photoLink": "photo/chelovek-i-priroda.jpg",
     "tag": ["nature", "perso"],
     "like": []
-}, {
+  },
+  {
     "id": "18",
     "descriprion": "вода",
     "createdAt": "2018-02-03T21:00:00.000Z",
@@ -142,7 +160,8 @@
     "photoLink": "photo/images23.jpg",
     "tag": ["goodtime", "gm", "water", "waterfall"],
     "like": []
-}, {
+  },
+  {
     "id": "19",
     "descriprion": "поле",
     "createdAt": "2017-02-03T21:00:00.000Z",
@@ -150,7 +169,8 @@
     "photoLink": "photo/purple-lavender-field-provence-france.jpg",
     "tag": ["goodtime", "gm", "purple", "nature"],
     "like": []
-}, {
+  },
+  {
     "id": "20",
     "descriprion": "яблочки",
     "createdAt": "2018-03-04T21:00:00.000Z",
@@ -158,4 +178,5 @@
     "photoLink": "photo/5359615-15088823151469610021-1508956902-650-48a5593f5d-1509449347.jpg",
     "tag": ["apple", "nature"],
     "like": []
-}]
+  }
+]
