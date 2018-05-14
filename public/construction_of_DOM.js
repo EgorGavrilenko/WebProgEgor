@@ -2,6 +2,7 @@ let workWithDOM = (function() {
   let count = 10;
   let last = 0;
   let filterConfig = {};
+  let user;
 
   function loadMorePhoto() {
     let perent = document.getElementById('perentid');
@@ -30,9 +31,16 @@ let workWithDOM = (function() {
     return last;
   }
 
+  function getUser() {
+    return user;
+  }
+
+  function setUser(a) {
+    user = a;
+  }
+
   function creatingPost(arr_photo) {
     if (!(arr_photo instanceof Array)) return;
-    let user = localStorage.getItem('user');
     let perent = document.getElementById('perentid');
 
     if (arr_photo.length != 0) {
@@ -159,7 +167,6 @@ let workWithDOM = (function() {
 
   function createheader() {
     let header = document.getElementById('idheader');
-    let user = localStorage.getItem('user');
     if (user != null) {
       let div_account = document.createElement('div');
       let div_add_photo = document.createElement('div');
@@ -226,33 +233,33 @@ let workWithDOM = (function() {
     button_signIn.onclick = function() {
       acc['login'] = input_login.value;
       acc['password'] = input_password.value;
+      events.logIn(acc['login'], acc['password']).then(
+        result => {
+          user = result;
+          cleanHeader();
+          createheader();
+          cleanTape();
 
-      if (
-        password.passwords.find(function(obj) {
-          return obj['login'] == acc['login'] && obj['password'] == acc['password'];
-        }) != null
-      ) {
-        localStorage.setItem('user', acc['login']);
-        cleanHeader();
-        createheader();
-        cleanTape();
+          events.getPosts(0, 10, filterConfig).then(
+            result => {
+              creatingPost(
+                JSON.parse(result, function(key, value) {
+                  if (key == 'createdAt') return new Date(value);
+                  return value;
+                })
+              );
+            },
+            error => {
+              throw new Error('some description of :( ');
+            }
+          );
+        },
+        error => {
+          throw new Error('some description of :( ');
+          mistake.messageMistake('wrong password or login');
+        }
+      );
 
-        events.getPosts(0, 10, filterConfig).then(
-          result => {
-            creatingPost(
-              JSON.parse(result, function(key, value) {
-                if (key == 'createdAt') return new Date(value);
-                return value;
-              })
-            );
-          },
-          error => {
-            throw new Error('some description of :( ');
-          }
-        );
-      } else {
-        mistake.messageMistake('wrong password or login');
-      }
       document.body.removeChild(div_sign_in);
       cleanBlock();
     };
@@ -279,21 +286,43 @@ let workWithDOM = (function() {
   }
 
   function exitfunction() {
-    localStorage.removeItem('user');
-    cleanHeader();
-    cleanTape();
-    createheader();
-    events.getPosts(0, 10, filterConfig).then(
+    events.logOut().then(
       result => {
-        creatingPost(
-          JSON.parse(result, function(key, value) {
-            if (key == 'createdAt') return new Date(value);
-            return value;
-          })
+        user = null;
+        cleanHeader();
+        cleanTape();
+        createheader();
+        events.getPosts(0, 10, filterConfig).then(
+          result => {
+            creatingPost(
+              JSON.parse(result, function(key, value) {
+                if (key == 'createdAt') return new Date(value);
+                return value;
+              })
+            );
+          },
+          error => {
+            throw new Error('some description of :( ');
+          }
         );
       },
       error => {
-        throw new Error('some description of :( ');
+        cleanHeader();
+        cleanTape();
+        createheader();
+        events.getPosts(0, 10, filterConfig).then(
+          result => {
+            creatingPost(
+              JSON.parse(result, function(key, value) {
+                if (key == 'createdAt') return new Date(value);
+                return value;
+              })
+            );
+          },
+          error => {
+            throw new Error('some description of :( ');
+          }
+        );
       }
     );
   }
@@ -347,6 +376,8 @@ let workWithDOM = (function() {
     filterSelected: filterSelected,
     cleanBlock: cleanBlock,
     last: last,
+    getUser: getUser,
+    setUser: setUser,
     setLast: setLast,
     filterConfig: filterConfig,
   };

@@ -66,7 +66,7 @@ let addphotoDOM = (function() {
         newpost['tag'] = str;
         let str2 = input_descr.value;
         newpost['descriprion'] = str2;
-        let user = localStorage.getItem('user');
+        let user = workWithDOM.getUser();
         if (user != null) newpost['author'] = user;
         events.addPhoto(img_url, newpost);
       }

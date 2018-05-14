@@ -1,4 +1,5 @@
 let camRollFunction = (function() {
+  /*
   function getSelectTimePeriod(time) {
     if (time === 'last 24 hour') {
       let d = new Date();
@@ -20,8 +21,8 @@ let camRollFunction = (function() {
       d.setMonth(d.getMonth() - 12);
       return d;
     }
-  }
-
+  }*/
+  /*
   function getPhotoPosts(skip, top, filterConfig) {
     if (skip > photoPostsModule.photoPosts.length) return null;
     let arr = [],
@@ -65,7 +66,7 @@ let camRollFunction = (function() {
       array[j] = arr[i];
     }
     return array;
-  }
+  }*/
 
   function is_array(a) {
     return typeof a === 'object' && a instanceof Array;
@@ -108,6 +109,7 @@ let camRollFunction = (function() {
     return true;
   }
 
+  /*
   function addPhotoPost(p) {
     p.id = String(photoPostsModule.photoPosts.length + 1);
     p.createdAt = new Date();
@@ -118,11 +120,13 @@ let camRollFunction = (function() {
       return true;
     } else return false;
   }
-
+  */
+  /*
   function getPhotoPost(index) {
     return photoPostsModule.photoPosts.find(x => x.id == index);
   }
-
+  */
+  /*
   function removePhotoPost(index) {
     let k = photoPostsModule.photoPosts.find(x => x.id == index);
     if (k === undefined) {
@@ -133,7 +137,8 @@ let camRollFunction = (function() {
       return true;
     }
   }
-
+  */
+  /*
   function editPhotoPost(index, change) {
     let k = photoPostsModule.photoPosts.find(x => x.id == index);
     if (k === undefined) {
@@ -175,13 +180,8 @@ let camRollFunction = (function() {
       return true;
     }
   }
-
+*/
   return {
-    getPhotoPosts: getPhotoPosts,
     validatePhotoPost: validatePhotoPost,
-    addPhotoPost: addPhotoPost,
-    getPhotoPost: getPhotoPost,
-    removePhotoPost: removePhotoPost,
-    editPhotoPost: editPhotoPost,
   };
 })();

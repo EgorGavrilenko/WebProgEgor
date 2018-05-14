@@ -1,4 +1,4 @@
-; let password = function() {
+/*; let password = function() {
    let passwords = [
        {
            login: "Гавриленко Егор",
@@ -12,4 +12,4 @@
    return{
        passwords: passwords
    }
-}();
+}();*/

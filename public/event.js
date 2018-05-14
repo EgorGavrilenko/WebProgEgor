@@ -156,7 +156,48 @@ let events = (function() {
     });
   }
 
+  function logIn(username, password) {
+    return new Promise(function(resolve, reject) {
+      let xhr = new XMLHttpRequest();
+      let body = JSON.stringify({
+        username: username,
+        password: password,
+      });
+      xhr.open('POST', '/login', true);
+      xhr.onload = function() {
+        if (this.status === 200) {
+          resolve(this.response);
+        } else {
+          let error = new Error(this.statusText);
+          error.code = this.status;
+          reject(error);
+        }
+      };
+      xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+      xhr.send(body);
+    });
+  }
+
+  function logOut() {
+    return new Promise(function(resolve, reject) {
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', '/logout', true);
+      xhr.onload = function() {
+        if (this.status === 200) {
+          resolve(this.response);
+        } else {
+          let error = new Error(this.statusText);
+          error.code = this.status;
+          reject(error);
+        }
+      };
+      xhr.send();
+    });
+  }
+
   return {
+    logIn: logIn,
+    logOut: logOut,
     addLike: addLike,
     removeLike,
     removeLike,

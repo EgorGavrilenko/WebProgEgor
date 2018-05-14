@@ -18,7 +18,7 @@ let smile = (function() {
     );
   }
   function likeFunction(post) {
-    let user = localStorage.getItem('user');
+    let user = workWithDOM.getUser();
     let a = post['like'].indexOf(user);
 
     if (a == -1) {

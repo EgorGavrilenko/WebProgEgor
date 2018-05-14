@@ -2,12 +2,28 @@ const express = require('express');
 const bodyParser = require('body-parser');
 let fs = require('fs');
 const app = express();
+let cookieParser = require('cookie-parser');
+let session = require('express-session');
+let passport = require('./passport');
+
+app.use(cookieParser());
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false },
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 let posts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'), function(key, value) {
-  if (key == 'createdAt') return new Date(value);
+  if (key === 'createdAt') return new Date(value);
   return value;
 });
 
@@ -45,27 +61,27 @@ app.post('/getPost', (req, res) => {
 
 app.post('/addPost', (req, res) => {
   p = {};
-  if (req.query.photoLink != undefined) {
+  if (req.query.photoLink !== undefined) {
     p.photoLink = 'photo/' + req.query.photoLink;
   } else {
     res.status(404).end();
     return;
   }
-  if (req.query.author != undefined) {
+  if (req.query.author !== undefined) {
     p.author = req.query.author;
   } else {
     res.status(404).end();
     return;
   }
-  if (req.query.descriprion != undefined) {
+  if (req.query.descriprion !== undefined) {
     p.descriprion = req.query.descriprion;
   } else {
     p.descriprion = '';
   }
   p.tag = [];
-  if (req.query.tag != undefined) {
+  if (req.query.tag !== undefined) {
     let i = 0;
-    while (req.query.tag[i] != undefined) {
+    while (req.query.tag[i] !== undefined) {
       p.tag.push(req.query.tag[i]);
       i++;
     }
@@ -88,8 +104,8 @@ app.post('/addPost', (req, res) => {
 
 app.delete('/deletePost', (req, res) => {
   let post = posts.find(post => req.query.id == post.id);
-  posts.splice(posts.indexOf(post), 1);
-  if (post != undefined) {
+  posts[posts.indexOf(post)]['delete'] = 'true';
+  if (post !== undefined) {
     fs.writeFileSync('./server/data/posts.json', JSON.stringify(posts));
     console.log(post.author + ' delete post');
 
@@ -103,13 +119,13 @@ app.put('/editPost', (req, res) => {
   let post = posts.find(post => req.query.id == post.id);
   if (post != undefined) {
     p = {};
-    if (req.query.descriprion != undefined) {
+    if (req.query.descriprion !== undefined) {
       p.descriprion = req.query.descriprion;
     }
-    if (req.query.tag != undefined) {
+    if (req.query.tag !== undefined) {
       p.tag = [];
       let i = 0;
-      while (req.query.tag[i] != undefined) {
+      while (req.query.tag[i] !== undefined) {
         p.tag.push(req.query.tag[i]);
         i++;
       }
@@ -126,12 +142,12 @@ app.put('/editPost', (req, res) => {
 
 app.get('/getPosts', (req, res) => {
   let skip, top;
-  if (req.query.skip != undefined) {
+  if (req.query.skip !== undefined) {
     skip = req.query.skip;
   } else {
     skip = 0;
   }
-  if (req.query.top != undefined) {
+  if (req.query.top !== undefined) {
     top = req.query.top;
   } else {
     top = posts.length;
@@ -143,13 +159,13 @@ app.get('/getPosts', (req, res) => {
 
   let arr = [],
     array = [];
-  if (req.query.filterConfig != undefined) {
+  if (req.query.filterConfig !== undefined) {
     let filterConfig = {};
-    if (req.query.filterConfig['author'] != undefined)
+    if (req.query.filterConfig['author'] !== undefined)
       filterConfig.author = req.query.filterConfig['author'];
-    if (req.query.filterConfig['createdAt'] != undefined)
+    if (req.query.filterConfig['createdAt'] !== undefined)
       filterConfig.createdAt = req.query.filterConfig['createdAt'];
-    if (req.query.filterConfig['tag'] != undefined) {
+    if (req.query.filterConfig['tag'] !== undefined) {
       filterConfig.tag = [];
       let i = 0;
       while (req.query.filterConfig['tag'][i] != undefined) {
@@ -190,14 +206,20 @@ app.get('/getPosts', (req, res) => {
           }
         }
       }
-      return true;
+      if (val['delete'] === 'true') {
+        return false;
+      } else return true;
     });
 
     for (let i = skip, j = 0; i < arr.length && j < top; i++, j++) {
       array[j] = arr[i];
     }
   } else {
-    for (let i = skip, j = 0; i < posts.length && j < top; i++, j++) array[j] = posts[i];
+    for (let i = skip, j = 0; i < posts.length && j < top; i++)
+      if (posts[i]['delete'] === 'false') {
+        array[j] = posts[i];
+        j++;
+      }
   }
   res.send(array);
 });
@@ -224,6 +246,25 @@ app.put('/removelike', (req, res) => {
   }
 });
 
-app.listen('3000', () => {
-  console.log('Server is running');
+app.post('/login', passport.authenticate('local'), function(req, res) {
+  console.log(req.user.username + '  entered');
+  res.send(req.user.username);
 });
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  else res.status(404).end();
+}
+
+app.get('/login', ensureAuthenticated, function(req, res) {
+  console.log(req.user.username + '  back');
+  res.send(req.user.username);
+});
+
+app.get('/logout', function(req, res) {
+  console.log(req.user.username + '  came out');
+  req.logout();
+  res.end();
+});
+
+module.exports = app;
