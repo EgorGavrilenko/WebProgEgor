@@ -1,146 +1,71 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-let fs = require('fs');
+const express = require("express");
+const bodyParser = require("body-parser");
+const fs = require("fs");
+const db = require("./config/db");
+const POSTS = require("./config/PostsSchema");
+
 const app = express();
-let cookieParser = require('cookie-parser');
-let session = require('express-session');
-let passport = require('./passport');
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const passport = require("./passport");
 
 app.use(cookieParser());
-app.use(
-  session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false },
-  })
-);
+app.use(session({
+  secret: "keyboard cat",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false },
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static('public'));
+app.use(express.static("public"));
 
-let posts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'), function(key, value) {
-  if (key === 'createdAt') return new Date(value);
-  return value;
+app.get("/getAllPosts", (req, res) => {
+  POSTS.find((err, Posts) => {
+    if (err) throw err;
+    res.send(Posts);
+  });
 });
 
+// const posts = JSON.parse(fs.readFileSync("./server/data/posts.json", "utf8"), (key, value) => {
+//   if (key === "createdAt") return new Date(value);
+//   return value;
+// });
+
+// console.log(posts);
+
+
 function getSelectTimePeriod(time) {
-  if (time === 'last 24 hour') {
-    let d = new Date();
+  if (time === "last 24 hour") {
+    const d = new Date();
     d.setDate(d.getDate() - 1);
     return d;
   }
-  if (time === 'last week') {
-    let d = new Date();
+  if (time === "last week") {
+    const d = new Date();
     d.setDate(d.getDate() - 7);
     return d;
   }
-  if (time === 'last month') {
-    let d = new Date();
+  if (time === "last month") {
+    const d = new Date();
     d.setMonth(d.getMonth() - 1);
     return d;
   }
-  if (time === 'last year') {
-    let d = new Date();
+  if (time === "last year") {
+    const d = new Date();
     d.setMonth(d.getMonth() - 12);
     return d;
   }
 }
 
-app.get('/allPosts', (req, res) => {
-  res.send(posts);
-});
-
-app.post('/getPost', (req, res) => {
-  let post = posts.find(post => req.query.id == post.id);
-  post ? res.send(post) : res.status(404).end();
-});
-
-app.post('/addPost', (req, res) => {
-  p = {};
-  if (req.query.photoLink !== undefined) {
-    p.photoLink = 'photo/' + req.query.photoLink;
-  } else {
-    res.status(404).end();
-    return;
-  }
-  if (req.query.author !== undefined) {
-    p.author = req.query.author;
-  } else {
-    res.status(404).end();
-    return;
-  }
-  if (req.query.descriprion !== undefined) {
-    p.descriprion = req.query.descriprion;
-  } else {
-    p.descriprion = '';
-  }
-  p.tag = [];
-  if (req.query.tag !== undefined) {
-    let i = 0;
-    while (req.query.tag[i] !== undefined) {
-      p.tag.push(req.query.tag[i]);
-      i++;
-    }
-  }
-  p.id = String(posts.length + 1);
-  p.createdAt = new Date();
-  p.like = [];
-  posts.push(p);
-
-  console.log(p.author + ' add new post');
-
-  fs.writeFileSync('./server/data/posts.json', JSON.stringify(posts));
-  let stream = fs.createWriteStream('./public/' + p.photoLink);
-  req.pipe(stream);
-
-  stream.on('end', () => res.end());
-  stream.on('error', err => console.log(err.message));
-  res.send();
-});
-
-app.delete('/deletePost', (req, res) => {
-  let post = posts.find(post => req.query.id == post.id);
-  posts[posts.indexOf(post)]['delete'] = 'true';
-  if (post !== undefined) {
-    fs.writeFileSync('./server/data/posts.json', JSON.stringify(posts));
-    console.log(post.author + ' delete post');
-
-    res.send(post);
-  } else {
-    res.status(404).end();
-  }
-});
-
-app.put('/editPost', (req, res) => {
-  let post = posts.find(post => req.query.id == post.id);
-  if (post != undefined) {
-    p = {};
-    if (req.query.descriprion !== undefined) {
-      p.descriprion = req.query.descriprion;
-    }
-    if (req.query.tag !== undefined) {
-      p.tag = [];
-      let i = 0;
-      while (req.query.tag[i] !== undefined) {
-        p.tag.push(req.query.tag[i]);
-        i++;
-      }
-    }
-    p.createdAt = new Date();
-    p.like = [];
-    res.send((posts[posts.indexOf(post)] = Object.assign(post, p)));
-    fs.writeFileSync('./server/data/posts.json', JSON.stringify(posts));
-    console.log(post.author + ' edit post');
-  } else {
-    res.status(404).end();
-  }
-});
-
 app.get('/getPosts', (req, res) => {
+  POSTS.count({},function(err,c){
+    if(err){res.status(404).end();
+      return;}
   let skip, top;
   if (req.query.skip !== undefined) {
     skip = req.query.skip;
@@ -152,7 +77,7 @@ app.get('/getPosts', (req, res) => {
   } else {
     top = posts.length;
   }
-  if (skip > posts.length) {
+  if (skip > c) {
     res.status(404).end();
     return;
   }
@@ -174,7 +99,10 @@ app.get('/getPosts', (req, res) => {
       }
     }
 
-    arr = posts.filter(function(val) {
+    POSTS.find({},function (err,PostsArray) {
+      if(err){res.status(404).end();
+        return;}
+    arr = PostsArray.filter(function(val) {
       if (typeof filterConfig === 'object') {
         if ('author' in filterConfig) {
           if (!(filterConfig['author'] === val['author'])) return false;
@@ -214,57 +142,175 @@ app.get('/getPosts', (req, res) => {
     for (let i = skip, j = 0; i < arr.length && j < top; i++, j++) {
       array[j] = arr[i];
     }
+    res.json(array);
+    });
   } else {
-    for (let i = skip, j = 0; i < posts.length && j < top; i++)
-      if (posts[i]['delete'] === 'false') {
-        array[j] = posts[i];
+    POSTS.find({},function (err,PostsArray) {
+      if(err){res.status(404).end();
+        return;}
+      for (let i = skip, j = 0; i < c && j < top; i++)
+      if (PostsArray[i]['delete'] === 'false') {
+        array[j] = PostsArray[i];
         j++;
-      }
+      } 
+      res.json(array);
+    });
   }
-  res.send(array);
+ 
+});
 });
 
-app.put('/addlike', (req, res) => {
-  let post = posts.find(post => req.query.id == post.id);
-  if (post != undefined && req.query.user != undefined) {
-    posts[posts.indexOf(post)]['like'].push(req.query.user);
-    fs.writeFileSync('./server/data/posts.json', JSON.stringify(posts));
-    res.send(post);
+app.post("/getPost", (req, res) => {
+  POSTS.findOne({ id: req.query.id }, (err, Post) => {
+    if (err) {
+      res.status(404).end();
+      return;
+    }
+  res.json(Post);
+  });
+});
+
+app.post("/addPost", (req, res) => {
+  const p = {};
+  if (req.query.photoLink !== undefined) {
+    p.photoLink = `photo/${req.query.photoLink}`;
   } else {
     res.status(404).end();
+    return;
   }
-});
-
-app.put('/removelike', (req, res) => {
-  let post = posts.find(post => req.query.id == post.id);
-  if (post != undefined && req.query.user != undefined) {
-    posts[posts.indexOf(post)]['like'].splice(req.query.user);
-    fs.writeFileSync('./server/data/posts.json', JSON.stringify(posts));
-    res.send(post);
+  if (req.query.author !== undefined) {
+    p.author = req.query.author;
   } else {
     res.status(404).end();
+    return;
   }
+  if (req.query.descriprion !== undefined) {
+    p.descriprion = req.query.descriprion;
+  } else {
+    p.descriprion = "";
+  }
+  p.tag = [];
+  if (req.query.tag !== undefined) {
+    let i = 0;
+    while (req.query.tag[i] !== undefined) {
+      p.tag.push(req.query.tag[i]);
+      i++;
+    }
+  }
+  p.createdAt = new Date();
+  p.like = [];
+
+  const stream = fs.createWriteStream(`./public/${p.photoLink}`);
+  req.pipe(stream);
+  stream.on("end", () => res.end());
+  stream.on("error", err => console.log(err.message));
+  POSTS.count((err, c) => {
+    p.id = String(c + 1);
+    POSTS.create(
+      {
+        id: p.id,
+        descriprion: p.descriprion,
+        createdAt: p.createdAt,
+        author: p.author,
+        photoLink: p.photoLink,
+        tag: p.tag,
+        like: p.like,
+      },
+      (err, Post) => {
+        if (err) {
+          res.status(404).end();
+          return;
+        }
+        POSTS.findOne({ id: p.id }, (err, Post) => {
+          if (err) {
+            res.status(404).end();
+            return;
+          }
+          console.log(`${p.author} add new post`);
+          res.json(Post);
+        });
+      },
+    );
+  });
 });
 
-app.post('/login', passport.authenticate('local'), function(req, res) {
-  console.log(req.user.username + '  entered');
+app.delete("/deletePost", (req, res) => {
+  POSTS.findOneAndUpdate({ id: req.query.id }, { delete: "true" }, (err, Post) => {
+    if (err) {
+      res.status(404).end();
+    }
+    console.log(`${Post.author} delete post`);
+    res.json(Post);
+  });
+});
+
+app.put("/editPost", (req, res) => {
+  p = {};
+  if (req.query.descriprion !== undefined) {
+    p.descriprion = req.query.descriprion;
+  }
+  if (req.query.tag !== undefined) {
+    p.tag = [];
+    let i = 0;
+    while (req.query.tag[i] !== undefined) {
+      p.tag.push(req.query.tag[i]);
+      i++;
+    }
+  }
+  p.createdAt = new Date();
+  p.like = [];
+  POSTS.findOneAndUpdate({ id: req.query.id }, p, (err, Post) => {
+    if (err) {
+      res.status(404).end();
+      return;
+    }
+    console.log(`${Post.author} edit post`);
+    res.json(Post);
+  });
+});
+
+
+
+app.put("/addlike", (req, res) => {
+  POSTS.findOneAndUpdate({ id: req.query.id }, { $push: { like: req.query.user } }, (err, Post) => {
+    if (err) {
+      res.status(404).end();
+      return;
+    }
+    res.json(Post);
+  });
+});
+
+app.put("/removelike", (req, res) => {
+  POSTS.findOneAndUpdate({ id: req.query.id }, { $pull: { like: req.query.user } }, (err, Post) => {
+    if (err) {
+      res.status(404).end();
+      return;
+    }
+    res.json(Post);
+  });
+});
+
+app.post("/login", passport.authenticate("local"), (req, res) => {
+  console.log(`${req.user.username}  entered`);
   res.send(req.user.username);
 });
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) return next();
-  else res.status(404).end();
+  res.status(401).end();
 }
 
-app.get('/login', ensureAuthenticated, function(req, res) {
-  console.log(req.user.username + '  back');
+app.get("/login", ensureAuthenticated, (req, res) => {
   res.send(req.user.username);
 });
 
-app.get('/logout', function(req, res) {
-  console.log(req.user.username + '  came out');
+app.get("/logout", (req, res) => {
+  console.log(`${req.user.username}  came out`);
   req.logout();
   res.end();
 });
 
-module.exports = app;
+app.listen("3000", () => {
+  console.log("Server is running");
+});

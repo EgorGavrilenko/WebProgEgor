@@ -1,36 +1,25 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcryptjs');
-const fs = require('fs');
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcryptjs");
+const db = require("./config/db");
+const User = require("./config/PasswordsSchema");
 
-let users = JSON.parse(fs.readFileSync('./server/data/passwords.json', 'utf8'));
-let newUsers = [];
-for (let i = 0; i < users.length; i++)
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(users[i]['password'], salt, function(err, hash) {
-      let newUser = {
-        username: users[i]['username'],
-        password: hash,
-      };
-      newUsers.push(newUser);
-    });
-  });
-
-passport.use(
-  new LocalStrategy(function(username, password, done) {
-    let user = newUsers.find(k => k.username === username);
-    if (user === undefined) {
+passport.use(new LocalStrategy((ausername, apassword, done) => {
+  User.findOne({ username: ausername }, (err, user) => {
+    if (err) done(null, false);
+    if (user) {
+      if (bcrypt.compareSync(apassword, user.password)) done(null, user);
+      else done(null, false);
+    } else {
       done(null, false);
     }
-    if (bcrypt.compareSync(password, user.password)) done(null, user);
-    else done(null, false);
-  })
-);
+  });
+}));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user);
 });
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser((user, done) => {
   done(null, user);
 });
 

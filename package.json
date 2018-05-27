@@ -15,10 +15,16 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "mongod": "^2.0.0",
+    "mongodb": "^3.1.0-beta4",
+    "mongoose": "^5.1.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.19.1"
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0"
   }
 }

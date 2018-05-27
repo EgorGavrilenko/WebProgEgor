@@ -1,4 +1,4 @@
-let camRollFunction = (function() {
+const camRollFunction = (function () {
   /*
   function getSelectTimePeriod(time) {
     if (time === 'last 24 hour') {
@@ -21,7 +21,7 @@ let camRollFunction = (function() {
       d.setMonth(d.getMonth() - 12);
       return d;
     }
-  }*/
+  } */
   /*
   function getPhotoPosts(skip, top, filterConfig) {
     if (skip > photoPostsModule.photoPosts.length) return null;
@@ -66,46 +66,48 @@ let camRollFunction = (function() {
       array[j] = arr[i];
     }
     return array;
-  }*/
+  } */
 
   function is_array(a) {
-    return typeof a === 'object' && a instanceof Array;
+    return typeof a === "object" && a instanceof Array;
   }
 
   function validatePhotoPost(photoPost) {
-    if (!(typeof photoPost === 'object')) return false;
-    if (!('id' in photoPost)) {
+    if (!(typeof photoPost === "object")) return false;
+    if (!("id" in photoPost)) {
       return false;
     }
-    if (!('descriprion' in photoPost)) {
+    if (!("descriprion" in photoPost)) {
       return false;
     }
-    if (!('createdAt' in photoPost)) {
+    if (!("createdAt" in photoPost)) {
       return false;
     }
-    if (!('author' in photoPost)) {
+    if (!("author" in photoPost)) {
       return false;
     }
-    if (!('photoLink' in photoPost)) {
+    if (!("photoLink" in photoPost)) {
       return false;
     }
-    if (!('tag' in photoPost)) {
+    if (!("tag" in photoPost)) {
       return false;
     }
-    if (!('like' in photoPost)) {
+    if (!("like" in photoPost)) {
       return false;
     }
-    if (!(typeof photoPost['id'] === 'string')) return false;
-    if (!(typeof photoPost['descriprion'] === 'string')) return false;
-    if (!(typeof photoPost['createdAt'] === typeof new Date())) return false;
-    if (!(typeof photoPost['author'] === 'string')) return false;
-    if (!(typeof photoPost['photoLink'] === 'string')) return false;
-    if (!is_array(photoPost['tag'])) return false;
-    if (!is_array(photoPost['like'])) return false;
-    for (let i = 0; i < photoPost['tag'].length; i++)
-      if (!(typeof photoPost['tag'][i] === 'string')) return false;
-    for (let i = 0; i < photoPost['like'].length; i++)
-      if (!(typeof photoPost['like'][i] === 'string')) return false;
+    if (!(typeof photoPost.id === "string")) return false;
+    if (!(typeof photoPost.descriprion === "string")) return false;
+    if (!(typeof photoPost.createdAt === typeof new Date())) return false;
+    if (!(typeof photoPost.author === "string")) return false;
+    if (!(typeof photoPost.photoLink === "string")) return false;
+    if (!is_array(photoPost.tag)) return false;
+    if (!is_array(photoPost.like)) return false;
+    for (let i = 0; i < photoPost.tag.length; i++) {
+      if (!(typeof photoPost.tag[i] === "string")) return false;
+    }
+    for (let i = 0; i < photoPost.like.length; i++) {
+      if (!(typeof photoPost.like[i] === "string")) return false;
+    }
     return true;
   }
 
@@ -182,6 +184,6 @@ let camRollFunction = (function() {
   }
 */
   return {
-    validatePhotoPost: validatePhotoPost,
+    validatePhotoPost,
   };
-})();
+}());

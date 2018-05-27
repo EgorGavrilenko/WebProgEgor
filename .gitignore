@@ -4,3 +4,4 @@
 node_modules/
 out/
 app.js
+mongodb/

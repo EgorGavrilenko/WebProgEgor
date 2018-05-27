@@ -1,4 +1,4 @@
-/*let photoPostsModule = (function() {
+/* let photoPostsModule = (function() {
   function fillLocalStorege() {
     if (localStorage.getItem('arrayPhotoPosts') === null) {
       this.photoPosts = JSON.parse(datajson, function(key, value) {
